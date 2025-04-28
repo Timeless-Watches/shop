@@ -1,0 +1,178 @@
+/* --- Base Styles & Variables --- */
+:root {
+    --primary-font: 'Playfair Display', serif;
+    --secondary-font: 'Montserrat', sans-serif;
+    --text-color: #333;
+    --primary-color: #8B4513; /* Sophisticated brown - Good for watches */
+    --secondary-color: #D2B48C; /* Tan / Beige - Complements brown */
+    /* Optional Accent: Consider a subtle metallic for highlights */
+    /* --accent-color: #B08D57; */ /* Soft Gold Example */
+    --background-light: #fdfcfc; /* Slightly off-white */
+    --background-dark: #2c2c2c;
+    --white: #ffffff;
+    --border-color: #e0e0e0;
+    --header-height: 80px;
+}
+
+/* --- Keep ALL the previous CSS from the first answer, THEN ADD/MODIFY the following --- */
+
+/* --- Hero Section Update --- */
+.hero-section {
+    /* Make sure to replace this placeholder */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://via.placeholder.com/1920x1080/A0522D/FFFFFF?text=Replace+with+Watch+Image');
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    min-height: calc(90vh - var(--header-height)); /* Slightly less tall maybe */
+    /* Rest of hero styles remain the same */
+}
+
+/* --- Category Grid (Formerly Services Grid) --- */
+/* You can rename .services-grid to .category-grid if you prefer, just update HTML too */
+.category-grid { /* Or keep as .services-grid if you didn't change class name */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.category-item { /* Or keep as .service-item */
+    text-align: center;
+    padding: 30px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    display: flex; /* Helps align content */
+    flex-direction: column; /* Stack icon, title, text */
+    justify-content: space-between; /* Pushes link to bottom */
+}
+
+.category-item:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transform: translateY(-5px);
+}
+
+.category-icon { /* Or keep as .service-icon */
+    font-size: 2.5rem;
+    color: var(--secondary-color); /* Use secondary color for icons */
+    margin-bottom: 20px;
+}
+
+.category-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.category-item p {
+    flex-grow: 1; /* Allows paragraph to take up space */
+    margin-bottom: 15px;
+}
+
+.link-arrow {
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    color: var(--primary-color);
+    margin-top: auto; /* Pushes to bottom */
+}
+.link-arrow:hover {
+     color: var(--secondary-color);
+}
+
+
+/* --- Product Grid (Formerly Portfolio Grid) --- */
+.intro-paragraph { /* Style for the text above grids */
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust minmax for product size */
+    gap: 30px; /* Slightly more gap maybe */
+    margin-top: 40px;
+}
+
+.product-item {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden; /* Keep image corners rounded */
+    background-color: var(--white); /* Ensure background */
+    transition: box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.product-item:hover {
+     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-item img {
+    /* Ensure images fill width, maintain aspect ratio */
+    width: 100%;
+    height: auto; /* Adjust if you need fixed height, use object-fit: cover */
+    /* Consider a fixed height for consistency if images vary a lot: */
+    /* height: 300px; object-fit: cover; */
+}
+
+.product-info {
+    padding: 20px;
+}
+
+.product-name {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    color: var(--text-color); /* Product names maybe not primary color */
+}
+
+.product-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+    min-height: 40px; /* Give description some space */
+}
+
+.product-price {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 15px; /* Space before potential button */
+}
+
+/* Optional: Styling for a 'View Details' button if added */
+.product-button {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+}
+
+/* --- Contact Form Adjustment --- */
+#contact { /* ID selector for the section */
+     background-color: var(--background-light); /* Make contact light again */
+}
+#contact.content-section { /* Override default padding if needed */
+     padding-bottom: 80px;
+}
+
+/* --- Responsive Adjustments (Add to existing @media queries or create new ones) --- */
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .hero-section {
+        min-height: 70vh; /* Adjust hero height on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr; /* Stack products fully on small mobile */
+    }
+     .product-name {
+        font-size: 1.2rem;
+    }
+}
+
+/* --- Ensure all previous CSS rules (.site-header, .nav-container, .logo-link, etc.) are still present! --- */
