@@ -1,178 +1,659 @@
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ~~        Timeless Watches - style.css        ~~ */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 /* --- Base Styles & Variables --- */
 :root {
     --primary-font: 'Playfair Display', serif;
     --secondary-font: 'Montserrat', sans-serif;
     --text-color: #333;
-    --primary-color: #8B4513; /* Sophisticated brown - Good for watches */
-    --secondary-color: #D2B48C; /* Tan / Beige - Complements brown */
-    /* Optional Accent: Consider a subtle metallic for highlights */
-    /* --accent-color: #B08D57; */ /* Soft Gold Example */
+    --heading-color: #2c2c2c; /* Slightly darker for headings */
+    --primary-color: #8B4513; /* Sophisticated brown */
+    --secondary-color: #D2B48C; /* Tan / Beige */
+    --accent-color: #B08D57; /* Optional Soft Gold for subtle highlights */
     --background-light: #fdfcfc; /* Slightly off-white */
     --background-dark: #2c2c2c;
     --white: #ffffff;
     --border-color: #e0e0e0;
     --header-height: 80px;
+    --base-font-size: 16px;
+    --base-line-height: 1.7;
+    --transition-speed: 0.3s;
 }
 
-/* --- Keep ALL the previous CSS from the first answer, THEN ADD/MODIFY the following --- */
-
-/* --- Hero Section Update --- */
-.hero-section {
-    /* Make sure to replace this placeholder */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://via.placeholder.com/1920x1080/A0522D/FFFFFF?text=Replace+with+Watch+Image');
-    background-size: cover;
-    background-position: center;
-    color: var(--white);
-    min-height: calc(90vh - var(--header-height)); /* Slightly less tall maybe */
-    /* Rest of hero styles remain the same */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* --- Category Grid (Formerly Services Grid) --- */
-/* You can rename .services-grid to .category-grid if you prefer, just update HTML too */
-.category-grid { /* Or keep as .services-grid if you didn't change class name */
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    margin-top: 40px;
+html {
+    scroll-behavior: smooth;
+    font-size: var(--base-font-size); /* Set base font size */
 }
 
-.category-item { /* Or keep as .service-item */
+body {
+    font-family: var(--secondary-font);
+    line-height: var(--base-line-height);
+    color: var(--text-color);
+    background-color: var(--white);
+    -webkit-font-smoothing: antialiased; /* Smoother fonts */
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Layout & Helpers --- */
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.bg-light {
+    background-color: var(--background-light);
+}
+
+.text-center {
     text-align: center;
-    padding: 30px 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Prevents bottom space */
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5, h6, .playfair-heading {
+    font-family: var(--primary-font);
+    font-weight: 700; /* Bold Playfair */
+    line-height: 1.3;
+    margin-bottom: 0.75em;
+    color: var(--heading-color); /* Consistent heading color */
+}
+
+h1.playfair-heading {
+    font-size: 3.5rem;
+}
+
+h2.section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 50px; /* Increased bottom margin */
+    position: relative;
+    padding-bottom: 15px; /* Space for underline */
+}
+
+/* Section title underline */
+h2.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+h3.playfair-heading {
+     font-size: 1.6rem;
+}
+
+h4.playfair-heading {
+     font-size: 1.4rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+    color: var(--secondary-color); /* Lighter color on hover */
+}
+
+.intro-paragraph { /* Style for the text above grids */
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    font-size: 1.05rem;
+    color: #555; /* Slightly lighter than body text */
+}
+
+/* --- Header & Navigation --- */
+.site-header {
+    background-color: var(--white);
+    height: var(--header-height);
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Slightly more pronounced shadow */
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo-image {
+    height: 45px; /* Adjust logo size */
+    margin-right: 12px;
+}
+
+.company-name {
+    font-family: var(--primary-font);
+    font-size: 1.9rem; /* Slightly larger name */
+    font-weight: 700;
+    color: var(--heading-color);
+    letter-spacing: 0.5px;
+}
+
+.main-nav ul.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav ul.nav-links li {
+    margin-left: 35px; /* More spacing */
+}
+
+.main-nav ul.nav-links a {
+    font-family: var(--secondary-font);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    padding: 5px 2px; /* Slightly more padding area */
+    position: relative;
+    transition: color var(--transition-speed) ease;
+}
+
+/* Underline effect on hover/active */
+.main-nav ul.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; /* Position underline slightly lower */
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width var(--transition-speed) ease;
+}
+
+.main-nav ul.nav-links a:hover,
+.main-nav ul.nav-links a.active /* Add 'active' class via JS if needed */ {
+    color: var(--primary-color);
+}
+.main-nav ul.nav-links a:hover::after,
+.main-nav ul.nav-links a.active::after {
+    width: 100%;
+}
+
+/* --- Mobile Menu --- */
+.mobile-menu-toggle {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    font-size: 1.6rem; /* Slightly larger icon */
+    color: var(--heading-color);
+    cursor: pointer;
+    padding: 10px; /* Easier to tap */
+    z-index: 1001; /* Ensure it's above the nav */
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    /* IMPORTANT: Replace this placeholder URL */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('https://via.placeholder.com/1920x1080/A0522D/FFFFFF?text=Replace+with+Your+Hero+Image');
+    background-size: cover;
+    background-position: center center; /* Better positioning */
+    background-attachment: fixed; /* Parallax effect */
+    color: var(--white);
+    min-height: calc(90vh - var(--header-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 20px; /* More padding */
+}
+
+.hero-content {
+     max-width: 750px; /* Constrain hero text width */
+}
+
+.hero-section .playfair-heading {
+    color: var(--white);
+    margin-bottom: 20px;
+    font-size: 4.2rem; /* Larger hero heading */
+    font-weight: 800; /* Bolder hero heading */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* Subtle text shadow */
+}
+
+.hero-section .subtitle {
+    font-size: 1.3rem;
+    max-width: 600px;
+    margin: 0 auto 40px auto; /* More space below subtitle */
+    font-weight: 400;
+    opacity: 0.95; /* Slightly more opaque */
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 14px 35px; /* Larger button padding */
+    font-family: var(--secondary-font);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.2px; /* More letter spacing */
+    border-radius: 5px; /* Slightly rounded */
+    border: 2px solid var(--primary-color);
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, transform var(--transition-speed) ease;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background-color: transparent;
+    color: var(--primary-color);
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.hero-section .cta-button {
+    border-color: var(--white); /* White border on hero */
+}
+
+.hero-section .cta-button:hover {
+    background-color: var(--white);
+    color: var(--primary-color);
+}
+
+/* --- General Content Sections --- */
+.content-section {
+    padding: 100px 0; /* More vertical padding */
+}
+
+/* --- About Section Specifics --- */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* --- Category Grid (Replaces Services) --- */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Slightly wider min */
+    gap: 40px;
+    margin-top: 50px; /* More space after title */
+}
+
+.category-item {
+    text-align: center;
+    padding: 40px 25px; /* More padding inside item */
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    display: flex; /* Helps align content */
-    flex-direction: column; /* Stack icon, title, text */
-    justify-content: space-between; /* Pushes link to bottom */
+    background-color: var(--white); /* Ensure background for shadow */
+    transition: box-shadow var(--transition-speed) ease, transform var(--transition-speed) ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .category-item:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); /* More pronounced shadow */
+    transform: translateY(-5px); /* Lift effect */
 }
 
-.category-icon { /* Or keep as .service-icon */
-    font-size: 2.5rem;
-    color: var(--secondary-color); /* Use secondary color for icons */
-    margin-bottom: 20px;
+.category-icon {
+    font-size: 2.8rem; /* Larger icon */
+    color: var(--secondary-color);
+    margin-bottom: 25px; /* More space below icon */
 }
 
 .category-item h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    color: var(--primary-color); /* Use primary color for category titles */
 }
 
 .category-item p {
     flex-grow: 1; /* Allows paragraph to take up space */
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    color: #555;
 }
 
 .link-arrow {
-    font-weight: 500;
+    font-weight: 600; /* Bolder link */
     text-transform: uppercase;
     font-size: 0.85rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
     color: var(--primary-color);
     margin-top: auto; /* Pushes to bottom */
+    transition: transform var(--transition-speed) ease;
+    display: inline-block; /* Needed for transform */
 }
 .link-arrow:hover {
-     color: var(--secondary-color);
+     color: var(--accent-color); /* Use accent color on hover */
+     transform: translateX(5px); /* Move arrow slightly */
 }
 
 
-/* --- Product Grid (Formerly Portfolio Grid) --- */
-.intro-paragraph { /* Style for the text above grids */
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 40px;
-}
-
+/* --- Product Grid (Replaces Portfolio) --- */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust minmax for product size */
-    gap: 30px; /* Slightly more gap maybe */
-    margin-top: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); /* Wider items */
+    gap: 40px; /* Increased gap */
+    margin-top: 50px; /* More space after title/intro */
 }
 
 .product-item {
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    overflow: hidden; /* Keep image corners rounded */
-    background-color: var(--white); /* Ensure background */
-    transition: box-shadow 0.3s ease;
+    overflow: hidden;
+    background-color: var(--white);
+    transition: box-shadow var(--transition-speed) ease, transform var(--transition-speed) ease;
     text-align: center;
+    display: flex;
+    flex-direction: column; /* Stack image and info */
 }
 
 .product-item:hover {
-     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+     transform: translateY(-5px);
 }
 
 .product-item img {
-    /* Ensure images fill width, maintain aspect ratio */
     width: 100%;
-    height: auto; /* Adjust if you need fixed height, use object-fit: cover */
-    /* Consider a fixed height for consistency if images vary a lot: */
-    /* height: 300px; object-fit: cover; */
+    height: 320px; /* Fixed height for image consistency */
+    object-fit: cover; /* Crop images nicely */
+    border-bottom: 1px solid var(--border-color); /* Separator */
 }
 
 .product-info {
-    padding: 20px;
+    padding: 25px 20px; /* More padding */
+    flex-grow: 1; /* Allow info to fill space */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space out elements */
 }
 
 .product-name {
-    font-size: 1.4rem;
-    margin-bottom: 8px;
-    color: var(--text-color); /* Product names maybe not primary color */
+    font-size: 1.5rem; /* Use Playfair here */
+    margin-bottom: 10px;
+    color: var(--heading-color);
+    font-family: var(--primary-font); /* Explicitly Playfair */
 }
 
 .product-description {
     font-size: 0.9rem;
     color: #666;
     margin-bottom: 15px;
-    min-height: 40px; /* Give description some space */
+    min-height: 45px; /* Ensure consistent space */
+    line-height: 1.5; /* Better readability for short lines */
 }
 
 .product-price {
     display: block;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--primary-color);
-    margin-bottom: 15px; /* Space before potential button */
+    margin-top: auto; /* Push price towards bottom */
+    padding-top: 10px; /* Space above price */
 }
 
 /* Optional: Styling for a 'View Details' button if added */
 .product-button {
     padding: 8px 20px;
     font-size: 0.85rem;
+    margin-top: 15px;
 }
 
-/* --- Contact Form Adjustment --- */
-#contact { /* ID selector for the section */
-     background-color: var(--background-light); /* Make contact light again */
-}
-#contact.content-section { /* Override default padding if needed */
-     padding-bottom: 80px;
+/* --- Contact Form --- */
+.contact-container {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
 }
 
-/* --- Responsive Adjustments (Add to existing @media queries or create new ones) --- */
+.contact-form {
+    margin-top: 40px;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 25px; /* More space between fields */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px; /* More space below label */
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 14px 18px; /* More padding inside inputs */
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-family: var(--secondary-font);
+    font-size: 1rem;
+    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.15); /* Subtle focus ring */
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px; /* Minimum text area height */
+}
+
+.contact-form .cta-button {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* --- Footer --- */
+.site-footer-bottom {
+    background-color: var(--background-dark);
+    color: rgba(255, 255, 255, 0.7); /* Lighter footer text */
+    padding: 40px 0; /* More padding */
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.site-footer-bottom p {
+    margin-bottom: 0;
+}
+.site-footer-bottom a {
+    color: rgba(255, 255, 255, 0.9);
+}
+.site-footer-bottom a:hover {
+    color: var(--secondary-color);
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ~~             Responsive Styles              ~~ */
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+@media (max-width: 992px) {
+     h1.playfair-heading,
+    .hero-section .playfair-heading {
+        font-size: 3.5rem; /* Slightly smaller on tablets */
+    }
+     .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+}
+
 @media (max-width: 768px) {
+    :root {
+        --header-height: 70px;
+    }
+
+    html {
+        font-size: 15px; /* Slightly smaller base font on mobile */
+    }
+
+    h1.playfair-heading,
+    .hero-section .playfair-heading {
+        font-size: 2.8rem;
+    }
+
+    h2.section-title {
+        font-size: 2.1rem;
+        margin-bottom: 40px;
+    }
+
+     .content-section {
+        padding: 80px 0;
+    }
+
+    .mobile-menu-toggle {
+        display: block; /* Show hamburger icon */
+    }
+
+    .main-nav {
+        /* Takes space but content is hidden until active */
+        order: 3; /* Push nav below logo/toggle in flex */
+        width: 100%;
+    }
+
+    .main-nav ul.nav-links {
+        display: none; /* Hide desktop nav links */
+        position: absolute;
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        border-top: 1px solid var(--border-color);
+    }
+
+    .main-nav ul.nav-links.active {
+        display: flex; /* Show mobile nav when active */
+    }
+
+    .main-nav ul.nav-links li {
+        margin: 10px 0;
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-nav ul.nav-links a {
+        padding: 12px 20px; /* Larger tap target */
+        display: block;
+        width: 100%;
+    }
+
+    .main-nav ul.nav-links a::after {
+        display: none; /* Remove underline effect on mobile */
+    }
+
+    .main-nav ul.nav-links a:hover {
+        background-color: rgba(139, 69, 19, 0.05); /* Subtle hover background */
+    }
+
+    .hero-section {
+        min-height: 75vh; /* Adjust hero height on mobile */
+        background-attachment: scroll; /* Disable parallax on mobile (often jerky) */
+    }
+    .hero-section .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .category-grid,
     .product-grid {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
     }
-    .hero-section {
-        min-height: 70vh; /* Adjust hero height on mobile */
+     .product-item img {
+        height: 280px; /* Adjust image height */
     }
+
+    .nav-container {
+        flex-wrap: wrap; /* Allow wrapping if needed, although unlikely */
+    }
+
 }
 
 @media (max-width: 480px) {
-    .product-grid {
-        grid-template-columns: 1fr; /* Stack products fully on small mobile */
+    h1.playfair-heading,
+    .hero-section .playfair-heading {
+        font-size: 2.3rem; /* Even smaller on small phones */
+        line-height: 1.2;
     }
-     .product-name {
-        font-size: 1.2rem;
+
+    h2.section-title {
+        font-size: 1.9rem;
+    }
+
+     .company-name {
+        font-size: 1.6rem;
+    }
+
+    .logo-image {
+        height: 38px;
+    }
+
+     .hero-section {
+        min-height: 65vh;
+        padding: 60px 15px;
+    }
+     .hero-section .subtitle {
+        font-size: 1rem;
+    }
+
+    .cta-button {
+        padding: 12px 28px;
+        font-size: 0.9rem;
+    }
+
+    .category-grid,
+    .product-grid {
+        grid-template-columns: 1fr; /* Stack items fully */
+        gap: 25px;
+    }
+     .product-item img {
+        height: 250px; /* Further adjust image height */
+    }
+
+    .content-section {
+        padding: 60px 0;
+    }
+
+    .container {
+        padding: 0 15px; /* Less padding on smallest screens */
     }
 }
-
-/* --- Ensure all previous CSS rules (.site-header, .nav-container, .logo-link, etc.) are still present! --- */
