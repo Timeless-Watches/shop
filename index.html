@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> <!-- Add theme attribute later with JS -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,39 +11,50 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
     <!-- Link to CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<body>
+<body> <!-- Will add class="dark-mode" via JS -->
 
     <header class="site-header">
         <div class="container nav-container">
             <a href="index.html" class="logo-link">
-                <img src="images/logo.png" alt="Timeless Logo" class="logo-image">
+                <!-- *** ADD ID HERE *** -->
+                <img src="images/logo_light.png" alt="Timeless Logo" class="logo-image" id="company-logo">
                 <span class="company-name">Timeless</span>
             </a>
+
+            <!-- *** ADD THEME TOGGLE BUTTON *** -->
+            <div class="header-controls">
+                <button class="theme-toggle-button" id="theme-toggle" aria-label="Switch to dark mode">
+                    <i class="fas fa-moon"></i> <!-- Moon icon for dark mode -->
+                    <!-- Icon will be changed via JS -->
+                </button>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+
             <nav class="main-nav">
                 <ul class="nav-links" id="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#watches">Watches</a></li>
                     <li><a href="#accessories">Accessories</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
-            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
-                <i class="fas fa-bars"></i>
-            </button>
         </div>
     </header>
 
+    <!-- Rest of your main content remains the same -->
     <main>
         <!-- Hero Section -->
         <section id="home" class="hero-section">
-             <!-- Recommended: Replace placeholder with a high-quality image of a stylish watch or lifestyle shot -->
-             <!-- e.g., background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('images/hero-watch.jpg'); -->
+             <!-- Background image styling handled in CSS -->
             <div class="container hero-content">
                 <h1 class="playfair-heading">Elegance Measured in Moments</h1>
                 <p class="subtitle">Discover meticulously curated timepieces and accessories that define your style.</p>
@@ -56,97 +67,88 @@
             <div class="container">
                 <h2 class="playfair-heading section-title">Our Passion for Time</h2>
                 <div class="about-content">
-                    <p>At Timeless, we believe a watch is more than just a time-telling device; it's an expression of personality, a mark of craftsmanship, and a companion through life's moments. We are dedicated to sourcing and offering exceptional watches and accessories that blend classic design with enduring quality.</p>
-                    <p>From iconic brands to hidden gems, each piece in our collection is selected for its character, precision, and timeless appeal.</p>
+                     <p>At Timeless, we believe a watch is more than just a time-telling device; it's an expression of personality, a mark of craftsmanship, and a companion through life's moments. We are dedicated to sourcing and offering exceptional watches and accessories that blend classic design with enduring quality.</p>
+                     <p>From iconic brands to hidden gems, each piece in our collection is selected for its character, precision, and timeless appeal.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Categories/Featured Section (Replaces Services) -->
+         <!-- Categories Section -->
         <section id="categories" class="content-section">
             <div class="container">
                 <h2 class="playfair-heading section-title">Explore Our Collections</h2>
                 <div class="category-grid">
+                    <!-- Category items... -->
                     <div class="category-item">
-                        <i class="fas fa-clock category-icon"></i> <!-- Watch Icon -->
+                        <i class="fas fa-clock category-icon"></i>
                         <h3 class="playfair-heading">Men's Watches</h3>
-                        <p>Sophisticated timepieces for the modern gentleman. Explore chronographs, dress watches, and more.</p>
+                        <p>Sophisticated timepieces for the modern gentleman.</p>
                         <a href="#watches" class="link-arrow">View Collection →</a>
                     </div>
                     <div class="category-item">
-                        <i class="far fa-clock category-icon"></i> <!-- Different Watch Icon -->
+                        <i class="far fa-clock category-icon"></i>
                         <h3 class="playfair-heading">Women's Watches</h3>
-                        <p>Elegant designs that combine fashion and function, perfect for any occasion.</p>
+                        <p>Elegant designs that combine fashion and function.</p>
                          <a href="#watches" class="link-arrow">View Collection →</a>
                     </div>
                     <div class="category-item">
-                        <i class="fas fa-tools category-icon"></i> <!-- Tools/Straps Icon -->
+                        <i class="fas fa-tools category-icon"></i>
                         <h3 class="playfair-heading">Watch Straps</h3>
-                        <p>Personalize your timepiece with premium leather, metal, and fabric straps.</p>
+                        <p>Personalize your timepiece with premium straps.</p>
                          <a href="#accessories" class="link-arrow">Shop Straps →</a>
                     </div>
                      <div class="category-item">
-                        <i class="fas fa-box-open category-icon"></i> <!-- Box/Storage Icon -->
+                        <i class="fas fa-box-open category-icon"></i>
                         <h3 class="playfair-heading">Accessories</h3>
-                        <p>Keep your collection pristine with watch winders, cases, and maintenance tools.</p>
+                        <p>Winders, cases, and maintenance tools.</p>
                          <a href="#accessories" class="link-arrow">Discover More →</a>
                     </div>
                 </div>
             </div>
         </section>
 
-         <!-- Featured Watches Section (Replaces Portfolio) -->
+         <!-- Featured Watches Section -->
          <section id="watches" class="content-section bg-light">
             <div class="container">
                 <h2 class="playfair-heading section-title">Featured Timepieces</h2>
                 <p class="text-center intro-paragraph">Handpicked selections showcasing exceptional design and craftsmanship.</p>
                 <div class="product-grid">
-                    <!-- Example Product Item 1 -->
+                    <!-- Product items... -->
                     <div class="product-item">
-                        <!-- Replace with actual product image -->
                         <img src="https://via.placeholder.com/400x450/cccccc/888888?text=Classic+Chronograph" alt="Classic Chronograph Watch">
                         <div class="product-info">
                              <h4 class="playfair-heading product-name">Classic Chronograph</h4>
                              <p class="product-description">A refined stainless steel chronograph with timeless appeal.</p>
                              <span class="product-price">$499.00</span>
-                             <!-- Link to product page (if you build one later) -->
-                             <!-- <a href="#" class="cta-button product-button">View Details</a> -->
                         </div>
                     </div>
-                     <!-- Example Product Item 2 -->
-                    <div class="product-item">
-                         <!-- Replace with actual product image -->
+                     <div class="product-item">
                         <img src="https://via.placeholder.com/400x450/cccccc/888888?text=Elegant+Ladies+Watch" alt="Elegant Ladies Watch">
                          <div class="product-info">
                              <h4 class="playfair-heading product-name">Rosè Gold Elegance</h4>
                              <p class="product-description">Minimalist design with a stunning rosè gold finish.</p>
                               <span class="product-price">$349.00</span>
-                             <!-- <a href="#" class="cta-button product-button">View Details</a> -->
                          </div>
                     </div>
-                     <!-- Example Product Item 3 -->
-                    <div class="product-item">
-                        <!-- Replace with actual product image -->
+                     <div class="product-item">
                         <img src="https://via.placeholder.com/400x450/cccccc/888888?text=Automatic+Diver" alt="Automatic Diver Watch">
                         <div class="product-info">
                             <h4 class="playfair-heading product-name">Deep Dive Automatic</h4>
                             <p class="product-description">Robust automatic movement built for adventure.</p>
                              <span class="product-price">$799.00</span>
-                            <!-- <a href="#" class="cta-button product-button">View Details</a> -->
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Accessories Section Placeholder -->
+        <!-- Accessories Section -->
          <section id="accessories" class="content-section">
             <div class="container">
                 <h2 class="playfair-heading section-title">Essential Accessories</h2>
                  <p class="text-center intro-paragraph">Complement your watch collection with our range of straps and care items.</p>
-                 <!-- You can add another product-grid here for accessories -->
                  <div class="product-grid">
-                     <!-- Example Accessory Item -->
+                     <!-- Accessory items... -->
                      <div class="product-item">
                         <img src="https://via.placeholder.com/400x300/cccccc/888888?text=Leather+Strap" alt="Leather Strap">
                         <div class="product-info">
@@ -172,15 +174,14 @@
             </div>
         </section>
 
-
         <!-- Contact Section -->
         <section id="contact" class="content-section bg-light">
             <div class="container contact-container">
                 <h2 class="playfair-heading section-title">Get In Touch</h2>
                 <p>Have questions about our collection or need assistance? We're here to help.</p>
                 <form action="#" method="post" class="contact-form">
-                     <!-- Form fields same as before -->
-                    <div class="form-group">
+                     <!-- Form fields... -->
+                     <div class="form-group">
                         <label for="name">Name:</label>
                         <input type="text" id="name" name="name" required>
                     </div>
@@ -202,14 +203,14 @@
         </section>
     </main>
 
-    <footer class="site-footer-bottom">
+     <footer class="site-footer-bottom">
         <div class="container">
-            <p>© 2024 Timeless Watches & Accessories. All Rights Reserved.</p>
+            <p>© <span id="current-year"></span> Timeless Watches & Accessories. All Rights Reserved.</p>
             <!-- Add social media links here if relevant -->
         </div>
     </footer>
 
     <!-- Link to JavaScript -->
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
