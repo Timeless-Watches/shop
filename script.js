@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Close menu when a link is clicked
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
+                // Only close if the mobile menu is active
                 if (navLinks.classList.contains('active')) {
                     navLinks.classList.remove('active');
                     menuIcon.className = 'fas fa-bars';
@@ -45,7 +46,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         body.classList.toggle('dark-mode', isDark);
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        logo.src = isDark ? darkLogoSrc : lightLogoSrc;
+
+        // Check if logo element exists before setting src
+        if(logo) {
+            logo.src = isDark ? darkLogoSrc : lightLogoSrc;
+        }
+
         themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon'; // Sun for light mode, Moon for dark
         themeToggleButton.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
     };
@@ -82,4 +88,54 @@ document.addEventListener('DOMContentLoaded', function() {
         yearSpan.textContent = new Date().getFullYear();
     }
 
-});
+    // --- Intersection Observer for Scroll Animations ---
+    // Check if IntersectionObserver is supported
+    if ('IntersectionObserver' in window) {
+        const observerOptions = {
+            root: null, // Use the viewport as the root
+            rootMargin: '0px',
+            threshold: 0.1 // Trigger when 10% of the element is visible (adjust as needed)
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                // Check if the element is intersecting
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        // Observe elements with the 'animate-on-scroll' class
+        const scrollElements = document.querySelectorAll('.animate-on-scroll');
+        scrollElements.forEach(el => observer.observe(el));
+
+        // Observe elements with the 'stagger-children' class (the parent)
+        const staggerParents = document.querySelectorAll('.stagger-children');
+        staggerParents.forEach(el => observer.observe(el));
+
+    } else {
+        // Fallback for browsers that don't support IntersectionObserver
+        // Make all elements visible immediately
+        console.warn("IntersectionObserver not supported. Animations disabled.");
+        const scrollElements = document.querySelectorAll('.animate-on-scroll, .stagger-children > *');
+        scrollElements.forEach(el => el.classList.add('is-visible'));
+    }
+
+
+    // --- Hero Load Animation ---
+    // Use requestAnimationFrame for smoother start
+    requestAnimationFrame(() => {
+        setTimeout(() => {
+            const loadElements = document.querySelectorAll('.animate-load');
+            loadElements.forEach(el => {
+                el.classList.add('is-visible');
+            });
+        }, 50); // Very small delay to allow initial render
+    });
+
+
+}); // End of DOMContentLoaded
