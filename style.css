@@ -1,6 +1,7 @@
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* ~~        Timeless Watches - style.css        ~~ */
 /* ~~     (Updated with Image-Based Dark Theme)    ~~ */
+/* ~~      (Rounded Corners & New Animations)      ~~ */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 /* --- Base Styles & Variables --- */
@@ -36,6 +37,13 @@
     --base-line-height: 1.7;
     --transition-speed: 0.3s;
     --transition-theme: background-color var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+    --image-border-radius: 8px; /* Define border radius for images */
+
+    /* Animation Variables */
+    --animation-duration: 0.8s; /* Slightly longer duration */
+    --animation-easing: cubic-bezier(0.165, 0.84, 0.44, 1); /* Smoother ease-out */
+    --animation-translate-y: 40px; /* Increase vertical distance */
+    --animation-scale-start: 0.95; /* Starting scale for zoom effect */
 }
 
 /* --- Dark Theme Variables --- */
@@ -62,7 +70,6 @@ body.dark-mode {
     --footer-link: #E5E7EB;
 
     /* HSL values for dark mode focus ring - estimate based on --primary-brand */
-    /* Approx HSL for #88B5D8: H:208, S:55%, L:70% */
     --primary-brand-hsl-dark: 208, 55%, 70%;
 }
 
@@ -72,17 +79,8 @@ body.dark-mode .company-name {
 }
 
 /* --- Global Styles --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    font-size: var(--base-font-size);
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: var(--base-font-size); }
 body {
     font-family: var(--secondary-font);
     line-height: var(--base-line-height);
@@ -91,329 +89,110 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transition: var(--transition-theme);
-    overflow-x: hidden; /* Prevent horizontal scroll caused by animations */
+    overflow-x: hidden;
 }
 
 /* --- Layout & Helpers --- */
-.container {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.bg-light {
-    background-color: var(--bg-accent);
-    transition: background-color var(--transition-speed) ease;
-}
-.content-section {
-     background-color: var(--bg-primary);
-     transition: var(--transition-theme);
-     padding: 100px 0; /* Moved from responsive */
-}
-
+.container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+.bg-light { background-color: var(--bg-accent); transition: background-color var(--transition-speed) ease; }
+.content-section { background-color: var(--bg-primary); transition: var(--transition-theme); padding: 100px 0; }
 .text-center { text-align: center; }
 img { max-width: 100%; height: auto; display: block; }
 
 /* --- Typography --- */
 h1, h2, h3, h4, h5, h6, .playfair-heading {
-    font-family: var(--primary-font);
-    font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 0.75em;
-    color: var(--heading-color);
-    transition: color var(--transition-speed) ease;
+    font-family: var(--primary-font); font-weight: 700; line-height: 1.3; margin-bottom: 0.75em; color: var(--heading-color); transition: color var(--transition-speed) ease;
 }
-
 h1.playfair-heading { font-size: 3.5rem; }
-h2.section-title {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 50px;
-    position: relative;
-    padding-bottom: 15px;
-}
-h2.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background-color: var(--secondary-brand);
-    transition: background-color var(--transition-speed) ease;
-}
+h2.section-title { font-size: 2.5rem; text-align: center; margin-bottom: 50px; position: relative; padding-bottom: 15px; }
+h2.section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: var(--secondary-brand); transition: background-color var(--transition-speed) ease; }
 h3.playfair-heading { font-size: 1.6rem; }
 h4.playfair-heading { font-size: 1.4rem; }
-
-p {
-    margin-bottom: 1rem;
-    color: var(--text-secondary);
-    transition: color var(--transition-speed) ease;
-}
+p { margin-bottom: 1rem; color: var(--text-secondary); transition: color var(--transition-speed) ease; }
 .about-content p { color: var(--text-primary); }
-
-a {
-    color: var(--primary-brand);
-    text-decoration: none;
-    transition: color var(--transition-speed) ease;
-}
+a { color: var(--primary-brand); text-decoration: none; transition: color var(--transition-speed) ease; }
 a:hover { color: var(--secondary-brand); }
-
-.intro-paragraph {
-    max-width: 650px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 40px;
-    font-size: 1.05rem;
-    color: var(--text-secondary);
-}
+.intro-paragraph { max-width: 650px; margin-left: auto; margin-right: auto; margin-bottom: 40px; font-size: 1.05rem; color: var(--text-secondary); }
 
 /* --- Header & Navigation --- */
-.site-header {
-    background-color: var(--bg-secondary);
-    height: var(--header-height);
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    box-shadow: 0 2px 10px var(--shadow-color);
-    transition: var(--transition-theme), box-shadow var(--transition-speed) ease;
-}
-
-.nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-}
-
+/* (Styles remain the same as before) */
+.site-header { background-color: var(--bg-secondary); height: var(--header-height); position: sticky; top: 0; left: 0; width: 100%; z-index: 1000; box-shadow: 0 2px 10px var(--shadow-color); transition: var(--transition-theme), box-shadow var(--transition-speed) ease; }
+.nav-container { display: flex; justify-content: space-between; align-items: center; height: 100%; }
 .logo-link { display: flex; align-items: center; text-decoration: none; }
 .logo-image { height: 45px; margin-right: 12px; transition: opacity var(--transition-speed) ease; }
-
-.company-name {
-    font-family: var(--primary-font);
-    font-size: 1.9rem;
-    font-weight: 700;
-    color: var(--heading-color); /* Default color, overridden in dark mode */
-    letter-spacing: 0.5px;
-    transition: color var(--transition-speed) ease;
-}
-
+.company-name { font-family: var(--primary-font); font-size: 1.9rem; font-weight: 700; color: var(--heading-color); letter-spacing: 0.5px; transition: color var(--transition-speed) ease; }
 .header-controls { display: flex; align-items: center; gap: 10px; }
-
-.theme-toggle-button {
-    background: none;
-    border: none;
-    color: var(--text-primary);
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 10px;
-    line-height: 1;
-    transition: color var(--transition-speed) ease, transform var(--transition-speed) ease;
-}
+.theme-toggle-button { background: none; border: none; color: var(--text-primary); font-size: 1.2rem; cursor: pointer; padding: 10px; line-height: 1; transition: color var(--transition-speed) ease, transform var(--transition-speed) ease; }
 .theme-toggle-button:hover { color: var(--primary-brand); transform: scale(1.1); }
 .theme-toggle-button i { display: block; }
-
 .main-nav ul.nav-links { list-style: none; display: flex; margin: 0; padding: 0; }
 .main-nav ul.nav-links li { margin-left: 35px; }
-.main-nav ul.nav-links a {
-    font-family: var(--secondary-font);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.9rem;
-    color: var(--text-primary);
-    padding: 5px 2px;
-    position: relative;
-    transition: color var(--transition-speed) ease;
-}
-.main-nav ul.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-brand);
-    transition: width var(--transition-speed) ease, background-color var(--transition-speed) ease;
-}
+.main-nav ul.nav-links a { font-family: var(--secondary-font); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; color: var(--text-primary); padding: 5px 2px; position: relative; transition: color var(--transition-speed) ease; }
+.main-nav ul.nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 2px; background-color: var(--primary-brand); transition: width var(--transition-speed) ease, background-color var(--transition-speed) ease; }
 .main-nav ul.nav-links a:hover, .main-nav ul.nav-links a.active { color: var(--primary-brand); }
 .main-nav ul.nav-links a:hover::after, .main-nav ul.nav-links a.active::after { width: 100%; }
-
-.mobile-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.6rem;
-    color: var(--heading-color);
-    cursor: pointer;
-    padding: 10px;
-    z-index: 1001;
-    transition: color var(--transition-speed) ease;
-}
+.mobile-menu-toggle { display: none; background: none; border: none; font-size: 1.6rem; color: var(--heading-color); cursor: pointer; padding: 10px; z-index: 1001; transition: color var(--transition-speed) ease; }
 
 /* --- Hero Section --- */
-.hero-section {
-    background-image: linear-gradient(var(--hero-overlay-color), var(--hero-overlay-color)), url('https://via.placeholder.com/1920x1080/A0522D/FFFFFF?text=Replace+with+Your+Hero+Image'); /* Keep your image */
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-    color: var(--hero-text-color);
-    min-height: calc(90vh - var(--header-height));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 80px 20px;
-    transition: background-image var(--transition-speed) ease;
-}
+/* (Styles remain the same as before) */
+.hero-section { background-image: linear-gradient(var(--hero-overlay-color), var(--hero-overlay-color)), url('https://via.placeholder.com/1920x1080/A0522D/FFFFFF?text=Replace+with+Your+Hero+Image'); background-size: cover; background-position: center center; background-attachment: fixed; color: var(--hero-text-color); min-height: calc(90vh - var(--header-height)); display: flex; align-items: center; justify-content: center; text-align: center; padding: 80px 20px; transition: background-image var(--transition-speed) ease; }
 .hero-content { max-width: 750px; }
-.hero-section .playfair-heading {
-    color: var(--hero-text-color);
-    margin-bottom: 20px;
-    font-size: 4.2rem;
-    font-weight: 800;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-}
-.hero-section .subtitle {
-    font-size: 1.3rem;
-    max-width: 600px;
-    margin: 0 auto 40px auto;
-    font-weight: 400;
-    opacity: 0.95;
-    color: var(--hero-text-color);
-}
+.hero-section .playfair-heading { color: var(--hero-text-color); margin-bottom: 20px; font-size: 4.2rem; font-weight: 800; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
+.hero-section .subtitle { font-size: 1.3rem; max-width: 600px; margin: 0 auto 40px auto; font-weight: 400; opacity: 0.95; color: var(--hero-text-color); }
 
 /* --- CTA Button --- */
-.cta-button {
-    display: inline-block;
-    background-color: var(--primary-brand);
-    color: var(--bg-secondary); /* Default text color (white/light bg) */
-    padding: 14px 35px;
-    font-family: var(--secondary-font);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    border-radius: 5px;
-    border: 2px solid var(--primary-brand);
-    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, transform var(--transition-speed) ease, border-color var(--transition-speed) ease;
-    cursor: pointer;
-}
-.cta-button:hover {
-    background-color: transparent;
-    color: var(--primary-brand);
-    border-color: var(--primary-brand);
-    transform: translateY(-2px);
-}
-.hero-section .cta-button {
-    border-color: var(--hero-text-color);
-    background-color: var(--primary-brand);
-    color: var(--hero-text-color);
-}
-.hero-section .cta-button:hover {
-    background-color: var(--hero-text-color);
-    color: var(--primary-brand);
-    border-color: var(--hero-text-color);
-}
-/* Adjust CTA text color in dark mode if needed for contrast */
-body.dark-mode .cta-button {
-    color: var(--bg-primary); /* Dark text on light button BG */
-}
-body.dark-mode .cta-button:hover {
-    color: var(--primary-brand); /* Accent color on transparent BG */
-}
-
+/* (Styles remain the same as before) */
+.cta-button { display: inline-block; background-color: var(--primary-brand); color: var(--bg-secondary); padding: 14px 35px; font-family: var(--secondary-font); font-weight: 500; text-transform: uppercase; letter-spacing: 1.2px; border-radius: 5px; border: 2px solid var(--primary-brand); transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, transform var(--transition-speed) ease, border-color var(--transition-speed) ease; cursor: pointer; }
+.cta-button:hover { background-color: transparent; color: var(--primary-brand); border-color: var(--primary-brand); transform: translateY(-2px); }
+.hero-section .cta-button { border-color: var(--hero-text-color); background-color: var(--primary-brand); color: var(--hero-text-color); }
+.hero-section .cta-button:hover { background-color: var(--hero-text-color); color: var(--primary-brand); border-color: var(--hero-text-color); }
+body.dark-mode .cta-button { color: var(--bg-primary); }
+body.dark-mode .cta-button:hover { color: var(--primary-brand); }
 
 /* --- Category Grid --- */
+/* (Styles remain the same as before) */
 .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px; margin-top: 50px; }
-.category-item {
-    text-align: center;
-    padding: 40px 25px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background-color: var(--bg-secondary);
-    transition: var(--transition-theme), box-shadow var(--transition-speed) ease, transform var(--transition-speed) ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
+.category-item { text-align: center; padding: 40px 25px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-secondary); transition: var(--transition-theme), box-shadow var(--transition-speed) ease, transform var(--transition-speed) ease; display: flex; flex-direction: column; justify-content: space-between; }
 .category-item:hover { box-shadow: 0 8px 25px var(--shadow-color); transform: translateY(-5px); }
 .category-icon { font-size: 2.8rem; color: var(--secondary-brand); margin-bottom: 25px; transition: color var(--transition-speed) ease; }
 .category-item h3 { font-size: 1.6rem; margin-bottom: 15px; color: var(--primary-brand); }
 .category-item p { flex-grow: 1; margin-bottom: 20px; color: var(--text-secondary); }
-.link-arrow {
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 0.8px;
-    color: var(--primary-brand);
-    margin-top: auto;
-    transition: transform var(--transition-speed) ease, color var(--transition-speed) ease;
-    display: inline-block;
-}
+.link-arrow { font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.8px; color: var(--primary-brand); margin-top: auto; transition: transform var(--transition-speed) ease, color var(--transition-speed) ease; display: inline-block; }
 .link-arrow:hover { color: var(--accent-brand); transform: translateX(5px); }
 
 /* --- Product Grid --- */
+/* (Added border-radius to img) */
 .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 40px; margin-top: 50px; }
-.product-item {
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: var(--bg-secondary);
-    transition: var(--transition-theme), box-shadow var(--transition-speed) ease, transform var(--transition-speed) ease;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-}
+.product-item { border: 1px solid var(--border-color); border-radius: calc(var(--image-border-radius) + 2px); /* Slightly larger radius for container */ overflow: hidden; /* Important for clipping image */ background-color: var(--bg-secondary); transition: var(--transition-theme), box-shadow var(--transition-speed) ease, transform var(--transition-speed) ease; text-align: center; display: flex; flex-direction: column; }
 .product-item:hover { box-shadow: 0 8px 25px var(--shadow-color); transform: translateY(-5px); }
-.product-item img { width: 100%; height: 320px; object-fit: cover; border-bottom: 1px solid var(--border-color); transition: border-color var(--transition-speed) ease; }
+.product-item img {
+    width: 100%; height: 320px; object-fit: cover;
+    /* Removed border-bottom, allow container border */
+    /* Add rounded corners */
+    border-radius: var(--image-border-radius);
+    /* Ensure radius applies only if image fills container */
+    display: block;
+}
 .product-info { padding: 25px 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
 .product-name { font-size: 1.5rem; margin-bottom: 10px; color: var(--heading-color); font-family: var(--primary-font); }
 .product-description { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 15px; min-height: 45px; line-height: 1.5; }
 .product-price { display: block; font-size: 1.2rem; font-weight: 700; color: var(--primary-brand); margin-top: auto; padding-top: 10px; }
 
 /* --- Contact Form --- */
+/* (Styles remain the same as before) */
 .contact-container { max-width: 700px; margin: 0 auto; text-align: center; }
 .contact-form { margin-top: 40px; text-align: left; }
 .form-group { margin-bottom: 25px; }
 .form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.9rem; color: var(--text-secondary); transition: color var(--transition-speed) ease; }
-.form-group input, .form-group textarea {
-    width: 100%;
-    padding: 14px 18px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-family: var(--secondary-font);
-    font-size: 1rem;
-    background-color: var(--bg-secondary);
-    color: var(--text-primary);
-    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background-color var(--transition-speed) ease, color var(--transition-speed) ease;
-}
-/* Updated focus styles using HSL for transparency */
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary-brand);
-    box-shadow: 0 0 0 3px hsla( var(--primary-brand-hsl, 25, 70%, 40%), 0.15);
-}
-body.dark-mode .form-group input:focus,
-body.dark-mode .form-group textarea:focus {
-     box-shadow: 0 0 0 3px hsla( var(--primary-brand-hsl-dark, 208, 55%, 70%), 0.25);
-}
-
+.form-group input, .form-group textarea { width: 100%; padding: 14px 18px; border: 1px solid var(--border-color); border-radius: 5px; font-family: var(--secondary-font); font-size: 1rem; background-color: var(--bg-secondary); color: var(--text-primary); transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background-color var(--transition-speed) ease, color var(--transition-speed) ease; }
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary-brand); box-shadow: 0 0 0 3px hsla( var(--primary-brand-hsl, 25, 70%, 40%), 0.15); }
+body.dark-mode .form-group input:focus, body.dark-mode .form-group textarea:focus { box-shadow: 0 0 0 3px hsla( var(--primary-brand-hsl-dark, 208, 55%, 70%), 0.25); }
 .form-group textarea { resize: vertical; min-height: 120px; }
 .contact-form .cta-button { display: block; width: 100%; text-align: center; }
 
 /* --- Footer --- */
-.site-footer-bottom {
-    background-color: var(--footer-bg);
-    color: var(--footer-text);
-    padding: 40px 0;
-    text-align: center;
-    font-size: 0.9rem;
-    transition: var(--transition-theme);
-}
+/* (Styles remain the same as before) */
+.site-footer-bottom { background-color: var(--footer-bg); color: var(--footer-text); padding: 40px 0; text-align: center; font-size: 0.9rem; transition: var(--transition-theme); }
 .site-footer-bottom p { margin-bottom: 0; }
 .site-footer-bottom a { color: var(--footer-link); }
 .site-footer-bottom a:hover { color: var(--secondary-brand); }
@@ -421,10 +200,11 @@ body.dark-mode .form-group textarea:focus {
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* ~~             Responsive Styles              ~~ */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-
+/* (Styles remain the same as before) */
 @media (max-width: 992px) {
      h1.playfair-heading, .hero-section .playfair-heading { font-size: 3.5rem; }
      .product-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+     .content-section { padding: 90px 0; } /* Adjust padding */
 }
 
 @media (max-width: 768px) {
@@ -440,28 +220,13 @@ body.dark-mode .form-group textarea:focus {
     .mobile-menu-toggle { display: block; }
     .theme-toggle-button { margin-right: 0; }
 
-    .main-nav ul.nav-links {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        background-color: var(--bg-secondary);
-        padding: 20px 0;
-        box-shadow: 0 5px 10px var(--shadow-color);
-        border-top: 1px solid var(--border-color);
-        transition: var(--transition-theme), box-shadow var(--transition-speed) ease;
-    }
+    .main-nav ul.nav-links { display: none; flex-direction: column; align-items: center; width: 100%; background-color: var(--bg-secondary); padding: 20px 0; box-shadow: 0 5px 10px var(--shadow-color); border-top: 1px solid var(--border-color); transition: var(--transition-theme), box-shadow var(--transition-speed) ease; }
     .main-nav ul.nav-links.active { display: flex; }
     .main-nav ul.nav-links li { margin: 10px 0; width: 100%; text-align: center; margin-left: 0; }
     .main-nav ul.nav-links a { padding: 12px 20px; display: block; width: 100%; }
     .main-nav ul.nav-links a::after { display: none; }
-    /* Mobile nav hover using HSL for transparency */
-    .main-nav ul.nav-links a:hover {
-        background-color: hsla( var(--primary-brand-hsl, 25, 70%, 40%), 0.08);
-    }
-     body.dark-mode .main-nav ul.nav-links a:hover {
-         background-color: hsla( var(--primary-brand-hsl-dark, 208, 55%, 70%), 0.15);
-    }
+    .main-nav ul.nav-links a:hover { background-color: hsla( var(--primary-brand-hsl, 25, 70%, 40%), 0.08); }
+     body.dark-mode .main-nav ul.nav-links a:hover { background-color: hsla( var(--primary-brand-hsl-dark, 208, 55%, 70%), 0.15); }
 
     .hero-section { min-height: 75vh; background-attachment: scroll; }
     .hero-section .subtitle { font-size: 1.1rem; }
@@ -488,80 +253,94 @@ body.dark-mode .form-group textarea:focus {
 
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-/* ~~             Animation Styles               ~~ */
+/* ~~         NEW Animation Styles               ~~ */
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-/* --- Base State for Scroll Animations --- */
-.animate-on-scroll {
+/* --- Base State for Fade-Up Animations (Text, Titles) --- */
+.animate-fade-up {
     opacity: 0;
-    transform: translateY(30px); /* Start slightly lower */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    will-change: opacity, transform; /* Optimization hint */
+    transform: translateY(var(--animation-translate-y));
+    transition: opacity calc(var(--animation-duration) * 0.9) var(--animation-easing),
+                transform var(--animation-duration) var(--animation-easing);
+    will-change: opacity, transform;
 }
 
-/* --- Visible State for Scroll Animations --- */
-.animate-on-scroll.is-visible {
+/* --- Visible State for Fade-Up --- */
+.animate-fade-up.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* --- Base State for Load Animations (Hero) --- */
+/* --- Base State for Load Animations (Hero - similar to fade-up but maybe faster) --- */
 .animate-load {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transform: translateY(calc(var(--animation-translate-y) / 2)); /* Shorter distance */
+    transition: opacity calc(var(--animation-duration) * 0.8) var(--animation-easing),
+                transform calc(var(--animation-duration) * 0.9) var(--animation-easing);
     will-change: opacity, transform;
 }
-/* Visible state for load animations (added via JS) */
 .animate-load.is-visible {
      opacity: 1;
      transform: translateY(0);
 }
 
 
-/* --- Staggering Animation for Children --- */
+/* --- Staggering Animation for Children (Grid Items - Zoom/Fade Effect) --- */
 .stagger-children > * { /* Target direct children */
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: scale(var(--animation-scale-start)) translateY(calc(var(--animation-translate-y) / 2)); /* Combine scale and slight lift */
+    transition: opacity calc(var(--animation-duration) * 0.9) var(--animation-easing),
+                transform var(--animation-duration) var(--animation-easing);
     will-change: opacity, transform;
 }
 
 .stagger-children.is-visible > * { /* Target children ONLY when parent is visible */
     opacity: 1;
+    transform: scale(1) translateY(0); /* Reset transforms */
+}
+
+/* --- Staggering Animation for Children (Form Groups - Fade-Up Effect) --- */
+/* Override for form children if we want fade-up instead of zoom */
+.contact-form.stagger-children > * {
+     opacity: 0;
+     transform: translateY(calc(var(--animation-translate-y) / 1.5)); /* Slightly less distance for form */
+     transition: opacity calc(var(--animation-duration) * 0.9) var(--animation-easing),
+                 transform var(--animation-duration) var(--animation-easing);
+     will-change: opacity, transform;
+}
+.contact-form.stagger-children.is-visible > * {
+    opacity: 1;
     transform: translateY(0);
 }
 
-/* Apply delays to staggered children */
-/* Adjust the number of nth-child rules based on max items per row / group */
+
+/* Apply delays to staggered children (remains the same logic) */
 .stagger-children.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
 .stagger-children.is-visible > *:nth-child(2) { transition-delay: 0.15s; }
 .stagger-children.is-visible > *:nth-child(3) { transition-delay: 0.25s; }
-.stagger-children.is-visible > *:nth-child(4) { transition-delay: 0.35s; } /* For grids up to 4 wide */
-.stagger-children.is-visible > *:nth-child(5) { transition-delay: 0.45s; } /* For contact form, etc. */
+.stagger-children.is-visible > *:nth-child(4) { transition-delay: 0.35s; }
+.stagger-children.is-visible > *:nth-child(5) { transition-delay: 0.45s; }
 .stagger-children.is-visible > *:nth-child(6) { transition-delay: 0.55s; }
-/* Add more if needed */
 .stagger-children.is-visible > *:nth-child(7) { transition-delay: 0.65s; }
 .stagger-children.is-visible > *:nth-child(8) { transition-delay: 0.75s; }
 
 
 /* Specific tweak for form button if it's a direct child */
-.stagger-children.is-visible > .cta-button {
-    /* Use a later delay if it's treated like other children */
-    /* If you have 4 inputs + 1 textarea, this might be the 6th item */
-     transition-delay: 0.55s; /* Example delay */
+.contact-form.stagger-children.is-visible > .cta-button {
+    /* Apply delay based on number of form groups before it */
+    transition-delay: 0.55s; /* Example: If 4 groups + textarea = 5 items before button */
 }
 
 
 /* --- Reduce Motion Accessibility --- */
 @media (prefers-reduced-motion: reduce) {
-  .animate-on-scroll,
+  .animate-fade-up,
   .animate-load,
   .stagger-children > * {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
     animation: none !important;
-    transition-delay: 0s !important; /* Reset delays too */
+    transition-delay: 0s !important;
   }
 }
