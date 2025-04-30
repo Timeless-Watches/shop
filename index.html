@@ -19,22 +19,20 @@
 <body> <!-- class="dark-mode" added dynamically via JS -->
 
     <header class="site-header">
+        <!-- Header Content (No changes needed here) -->
         <div class="container nav-container">
             <a href="index.html" class="logo-link">
-                <!-- Logo changes theme via JS -->
                 <img src="images/logo_light.png" alt="Timeless Logo" class="logo-image" id="company-logo">
                 <span class="company-name">Timeless</span>
             </a>
-
             <div class="header-controls">
                 <button class="theme-toggle-button" id="theme-toggle" aria-label="Switch to dark mode">
-                    <i class="fas fa-moon"></i> <!-- Icon changes theme via JS -->
+                    <i class="fas fa-moon"></i>
                 </button>
                 <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
-
             <nav class="main-nav">
                 <ul class="nav-links" id="nav-links">
                     <li><a href="#home">Home</a></li>
@@ -51,7 +49,7 @@
         <!-- Hero Section - Animate elements on load -->
         <section id="home" class="hero-section">
             <div class="container hero-content">
-                <!-- Add animation classes directly for load animation -->
+                <!-- Use specific load animation class -->
                 <h1 class="playfair-heading animate-load" style="transition-delay: 0.1s;">Elegance Measured in Moments</h1>
                 <p class="subtitle animate-load" style="transition-delay: 0.3s;">Discover meticulously curated timepieces and accessories that define your style.</p>
                 <a href="#watches" class="cta-button animate-load" style="transition-delay: 0.5s;">Explore Watches</a>
@@ -61,12 +59,11 @@
         <!-- About Section -->
         <section id="about" class="content-section bg-light">
             <div class="container">
-                <!-- Add animation class to title -->
-                <h2 class="playfair-heading section-title animate-on-scroll">Our Passion for Time</h2>
+                <!-- Use fade-up for title and text -->
+                <h2 class="playfair-heading section-title animate-fade-up">Our Passion for Time</h2>
                 <div class="about-content">
-                    <!-- Add animation class to paragraphs -->
-                     <p class="animate-on-scroll">At Timeless, we believe a watch is more than just a time-telling device; it's an expression of personality, a mark of craftsmanship, and a companion through life's moments. We are dedicated to sourcing and offering exceptional watches and accessories that blend classic design with enduring quality.</p>
-                     <p class="animate-on-scroll" style="transition-delay: 0.1s;">From iconic brands to hidden gems, each piece in our collection is selected for its character, precision, and timeless appeal.</p>
+                     <p class="animate-fade-up" style="transition-delay: 0.1s;">At Timeless, we believe a watch is more than just a time-telling device...</p>
+                     <p class="animate-fade-up" style="transition-delay: 0.2s;">From iconic brands to hidden gems...</p>
                 </div>
             </div>
         </section>
@@ -74,12 +71,12 @@
          <!-- Categories Section -->
         <section id="categories" class="content-section">
             <div class="container">
-                <!-- Add animation class to title -->
-                <h2 class="playfair-heading section-title animate-on-scroll">Explore Our Collections</h2>
-                <!-- Add stagger class to the grid parent -->
+                <!-- Use fade-up for title -->
+                <h2 class="playfair-heading section-title animate-fade-up">Explore Our Collections</h2>
+                <!-- Keep stagger class for the grid parent (children will zoom/fade) -->
                 <div class="category-grid stagger-children">
-                    <!-- Children will get animation via CSS/JS targeting -->
-                    <div class="category-item"> <!-- No class needed here directly -->
+                    <!-- Category items (no direct animation class needed) -->
+                    <div class="category-item">
                         <i class="fas fa-clock category-icon"></i>
                         <h3 class="playfair-heading">Men's Watches</h3>
                         <p>Sophisticated timepieces for the modern gentleman.</p>
@@ -110,13 +107,13 @@
          <!-- Featured Watches Section -->
          <section id="watches" class="content-section bg-light">
             <div class="container">
-                 <!-- Add animation class to title and intro -->
-                <h2 class="playfair-heading section-title animate-on-scroll">Featured Timepieces</h2>
-                <p class="text-center intro-paragraph animate-on-scroll" style="transition-delay: 0.1s;">Handpicked selections showcasing exceptional design and craftsmanship.</p>
-                 <!-- Add stagger class to the grid parent -->
+                 <!-- Use fade-up for title and intro -->
+                <h2 class="playfair-heading section-title animate-fade-up">Featured Timepieces</h2>
+                <p class="text-center intro-paragraph animate-fade-up" style="transition-delay: 0.1s;">Handpicked selections showcasing exceptional design and craftsmanship.</p>
+                 <!-- Keep stagger class for the grid parent (children will zoom/fade) -->
                 <div class="product-grid stagger-children">
-                    <!-- Product items -->
-                    <div class="product-item"> <!-- No class needed here directly -->
+                    <!-- Product items (no direct animation class needed) -->
+                    <div class="product-item">
                         <img src="https://via.placeholder.com/400x450/cccccc/888888?text=Classic+Chronograph" alt="Classic Chronograph Watch">
                         <div class="product-info">
                              <h4 class="playfair-heading product-name">Classic Chronograph</h4>
@@ -140,7 +137,6 @@
                              <span class="product-price">$799.00</span>
                         </div>
                     </div>
-                    <!-- Add more product items as needed -->
                 </div>
             </div>
         </section>
@@ -148,13 +144,13 @@
         <!-- Accessories Section -->
          <section id="accessories" class="content-section">
             <div class="container">
-                 <!-- Add animation class to title and intro -->
-                <h2 class="playfair-heading section-title animate-on-scroll">Essential Accessories</h2>
-                 <p class="text-center intro-paragraph animate-on-scroll" style="transition-delay: 0.1s;">Complement your watch collection with our range of straps and care items.</p>
-                  <!-- Add stagger class to the grid parent -->
+                 <!-- Use fade-up for title and intro -->
+                <h2 class="playfair-heading section-title animate-fade-up">Essential Accessories</h2>
+                 <p class="text-center intro-paragraph animate-fade-up" style="transition-delay: 0.1s;">Complement your watch collection with our range of straps and care items.</p>
+                  <!-- Keep stagger class for the grid parent (children will zoom/fade) -->
                  <div class="product-grid stagger-children">
-                     <!-- Accessory items -->
-                     <div class="product-item"> <!-- No class needed here directly -->
+                     <!-- Accessory items (no direct animation class needed) -->
+                     <div class="product-item">
                         <img src="https://via.placeholder.com/400x300/cccccc/888888?text=Leather+Strap" alt="Leather Strap">
                         <div class="product-info">
                             <h4 class="playfair-heading product-name">Premium Leather Strap</h4>
@@ -175,7 +171,6 @@
                             <span class="product-price">$59.00</span>
                         </div>
                      </div>
-                     <!-- Add more accessory items as needed -->
                  </div>
             </div>
         </section>
@@ -183,13 +178,13 @@
         <!-- Contact Section -->
         <section id="contact" class="content-section bg-light">
             <div class="container contact-container">
-                 <!-- Add animation class to title and intro -->
-                <h2 class="playfair-heading section-title animate-on-scroll">Get In Touch</h2>
-                <p class="animate-on-scroll" style="transition-delay: 0.1s;">Have questions about our collection or need assistance? We're here to help.</p>
-                 <!-- Add stagger class to the form children (or groups) -->
+                 <!-- Use fade-up for title and intro -->
+                <h2 class="playfair-heading section-title animate-fade-up">Get In Touch</h2>
+                <p class="animate-fade-up" style="transition-delay: 0.1s;">Have questions about our collection or need assistance? We're here to help.</p>
+                 <!-- Keep stagger class for the form (children will fade-up) -->
                 <form action="#" method="post" class="contact-form stagger-children">
                      <!-- Form fields -->
-                     <div class="form-group"> <!-- Children of stagger-children -->
+                     <div class="form-group"> <!-- No direct animation class needed -->
                         <label for="name">Name:</label>
                         <input type="text" id="name" name="name" required>
                     </div>
@@ -205,7 +200,6 @@
                         <label for="message">Message:</label>
                         <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
-                    <!-- Animate button separately or as last child -->
                     <button type="submit" class="cta-button">Send Message</button>
                 </form>
             </div>
@@ -213,9 +207,9 @@
     </main>
 
      <footer class="site-footer-bottom">
+         <!-- Footer Content (No changes needed here) -->
         <div class="container">
              <p>© <span id="current-year"></span> Timeless Watches & Accessories. All Rights Reserved.</p>
-             <!-- Optional: Add social media links or other footer content -->
         </div>
     </footer>
 
